@@ -6,7 +6,7 @@ import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
 import { Hotel } from '../models/hotel';
 import { } from '@types/googlemaps';
-import {Subscription} from "rxjs/Subscription";
+import {Subscription} from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-hotel-info',
@@ -27,8 +27,8 @@ export class HotelInfoComponent implements OnInit {
 
   public miami: boolean;
   public sf: boolean;
-  public ny:boolean;
-  public boston:boolean;
+  public ny: boolean;
+  public boston: boolean;
   public la: boolean;
 
   constructor(public hotelInfo: HotelInfo, private route: ActivatedRoute) {
@@ -79,21 +79,21 @@ export class HotelInfoComponent implements OnInit {
     });
   }
 
-  private getcity(){
-    if(this.hotel.city === 'Miami'){
+  private getcity() {
+    if (this.hotel.city === 'Miami') {
       this.miami = true;
     }
-    if(this.hotel.city === 'San Francisco'){
-      this.sf=true;
+    if (this.hotel.city === 'San Francisco') {
+      this.sf = true;
     }
-    if(this.hotel.city=="New York"){
-      this.ny=true;
+    if (this.hotel.city === 'New York') {
+      this.ny = true;
     }
-    if(this.hotel.city=="Boston"){
-      this.boston=true;
+    if (this.hotel.city === 'Boston') {
+      this.boston = true;
     }
-    if(this.hotel.city=="Los Angeles"){
-      this.la=true;
+    if (this.hotel.city === 'Los Angeles') {
+      this.la = true;
     }
 
   }

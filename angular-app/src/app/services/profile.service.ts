@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
-import { AngularFireAuth } from "angularfire2/auth";
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Reservation } from '../booking/shared/reservation.model';
 
 import { promise } from 'protractor';
-import { Hotel } from "../models/hotel";
+import { Hotel } from '../models/hotel';
 import { HotelInfo } from './hotel-info';
 import { Booking } from '../models/booking';
 
 import { DatePipe } from '@angular/common';
-import { BehaviorSubject } from "rxjs/BehaviorSubject";
-import { Observable } from "rxjs/Observable";
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 import { snapshotChanges } from 'angularfire2/database';
 
 
@@ -32,25 +32,25 @@ export class UserProfileService {
     zipcode: string;
     bookings: Booking[] = [];
     history: Booking[] = [];
-    private _observableList: BehaviorSubject<Booking[]> = new BehaviorSubject([])
-    private _observableList2: BehaviorSubject<Booking[]> = new BehaviorSubject([])
+    private _observableList: BehaviorSubject<Booking[]> = new BehaviorSubject([]);
+    private _observableList2: BehaviorSubject<Booking[]> = new BehaviorSubject([]);
     bookingsObs: Observable<Booking[]>;
 
     favorites: string[] = [];
     private _observableFavList: BehaviorSubject<Hotel[]> = new BehaviorSubject([]);
-    favEmpty: boolean = false;
+    favEmpty: false;
     favHotels: Hotel[] = [];
     isRedeem: boolean;
-    buttonDisabled: boolean = false;
+    buttonDisabled: false;
     hasPicture: boolean;
     picIndex: number;
-    pipe : DatePipe;
+    pipe: DatePipe;
 
     activeHotel: Hotel;
 
     constructor(public afAuth: AngularFireAuth, private hotelInfo: HotelInfo) {
-        //afAuth used in profile component to upload picture
-        //this.getUserInfo();
+        // afAuth used in profile component to upload picture
+        // this.getUserInfo();
         this.pipe = new DatePipe('en-US');
         this.hotelInfo.activeHotel.subscribe( value => this.activeHotel = value);
     }
@@ -83,30 +83,28 @@ export class UserProfileService {
         await firebase.database().ref('/users/' + this.uid + '/reservations/').once('value').then(
             async(snapshot) => {
                 const countRes = snapshot.numChildren();
-                for (var i = 0; i < countRes; i++) {
-                    var number = i.toString();
-                    let booking = new Booking();
-                    var snap = Object.keys(snapshot.val());
-                    var key = snap[i];
+                for (let i = 0; i < countRes; i++) {
+                    const number = i.toString();
+                    const booking = new Booking();
+                    const snap = Object.keys(snapshot.val());
+                    const key = snap[i];
                     booking.$key = key;
                     booking.checkInDt = snapshot.child(key + '/checkInDt').val();
                     booking.checkOutDt = snapshot.child(key + '/checkOutDt').val();
                     booking.comments = snapshot.child(key + '/comments').val();
                     booking.guests = snapshot.child(key + '/guests').val();
                     booking.rooms = snapshot.child(key + '/rooms').val();
-                    booking.hotelID = snapshot.child(key +'/hotelID').val();
+                    booking.hotelID = snapshot.child(key + '/hotelID').val();
                     await this.getHotelInfo(snapshot.child(key + '/hotelID').val(), booking);
 
-                    var dat: string = this.pipe.transform(new Date, 'yyyy-MM-dd')
-                    var today = Date.parse(dat);
-                    var chIn = Date.parse(booking.checkInDt);
-                    var chOut = Date.parse(booking.checkOutDt);
+                    const dat: string = this.pipe.transform(new Date, 'yyyy-MM-dd');
+                    const today = Date.parse(dat);
+                    const chIn = Date.parse(booking.checkInDt);
+                    const chOut = Date.parse(booking.checkOutDt);
 
-                    if(chIn > today)
-                    {
+                    if (chIn > today) {
                         this.bookings.push(booking);
-                    }
-                    else {
+                    } else {
                         this.history.push(booking);
                     }
                 }
@@ -122,10 +120,10 @@ export class UserProfileService {
         booking.hotelLoc = this.activeHotel.location;
         booking.image = this.activeHotel.firstImage;
         // const id_ref = firebase.database().ref('/hotel_id');
-        // var index;
+        // const index;
         // await id_ref.once('value').then((snapshot) => {
         //     const count = snapshot.numChildren();
-        //     for (var i = 0; i < count; i++) {
+        //     for (const i = 0; i < count; i++) {
         //         const number = i.toString();
         //         if (snapshot.child(number).val() == hotelID) {
         //             index = number;
@@ -134,7 +132,7 @@ export class UserProfileService {
         //     }
         // });
         // await this.hotelInfo.getHotelData(index);
-        // var hotel = new Hotel();
+        // const hotel = new Hotel();
         // hotel = this.hotelInfo.getHotel();
         // booking.hotelName = hotel.name;
         // booking.hotelLoc = hotel.location;
@@ -149,10 +147,10 @@ export class UserProfileService {
     }
 
     async editComment(key, new_comment) {
-        console.log(key+' '+new_comment);
+        console.log(key + ' ' + new_comment);
         const ref = firebase.database().ref();
         const comment = {};
-        comment['/users/' + this.uid + '/reservations/' + key + '/comments/']= new_comment;
+        comment['/users/' + this.uid + '/reservations/' + key + '/comments/'] = new_comment;
         await ref.update(comment);
         window.location.reload();
     }
@@ -161,12 +159,12 @@ export class UserProfileService {
         return this._observableList.asObservable();
     }
 
-    getHistoryObs():Observable<Booking[]> {
+    getHistoryObs(): Observable<Booking[]> {
         return this._observableList2.asObservable();
     }
 
     getFullName(): string {
-        return this.firstname + " " + this.lastname;
+        return this.firstname + ' ' + this.lastname;
     }
 
     reduceTotalBy() {
@@ -226,11 +224,10 @@ export class UserProfileService {
         if (password != null && re_pass != null && password.length > 0 && re_pass.length > 0 && password === re_pass) {
             firebase.auth().currentUser.updatePassword(password)
                 .then(function () {
-                    console.log("Password changed");
+                    console.log('Password changed');
                 });
-        }
-        else {
-            console.log("Passwords don't match");
+        } else {
+            console.log('Passwords don\'t match');
         }
     }
 
@@ -249,15 +246,15 @@ export class UserProfileService {
     }
 
     async removeFav(hotelID) {
-        var key: string;
+        let key: string;
         const ref = firebase.database().ref('/users/' + this.uid + '/favorites/');
         await ref.once('value')
             .then(async (snapshot) => {
                 const countRes = snapshot.numChildren();
-                for (var i = 0; i < countRes; i++) {
-                    var snap = Object.keys(snapshot.val());
+                for (let i = 0; i < countRes; i++) {
+                    const snap = Object.keys(snapshot.val());
                     key = snap[i];
-                    if(snapshot.child(key).val() == hotelID) {
+                    if (snapshot.child(key).val() === hotelID) {
                         await ref.child(key).remove();
                         window.location.reload();
                     }
@@ -270,10 +267,10 @@ export class UserProfileService {
         await firebase.database().ref('/users/' + this.uid + '/favorites/').on('value',
             async (snapshot) => {
                 const countFav = snapshot.numChildren();
-                for (var i = 0; i < countFav; i++) {
-                    var snap = Object.keys(snapshot.val());
-                    var key = snap[i];
-                    var htlID = snapshot.child(key).val();
+                for (let i = 0; i < countFav; i++) {
+                    const snap = Object.keys(snapshot.val());
+                    const key = snap[i];
+                    const htlID = snapshot.child(key).val();
 
                     this.favorites.push(htlID);
 
@@ -287,12 +284,12 @@ export class UserProfileService {
     async getFavHotelInfo(htlID) {
       await this.hotelInfo.initHotelByID(htlID);
       this.favHotels.push(this.activeHotel);
-        // var hotel = new Hotel();
+        // const hotel = new Hotel();
         // const id_ref = firebase.database().ref('/hotel_id');
-        // var index;
+        // const index;
         // await id_ref.once('value').then((snapshot) => {
         //     const count = snapshot.numChildren();
-        //     for (var i = 0; i < count; i++) {
+        //     for (const i = 0; i < count; i++) {
         //         const number = i.toString();
         //         if (snapshot.child(number).val() == htlID) {
         //             index = number;

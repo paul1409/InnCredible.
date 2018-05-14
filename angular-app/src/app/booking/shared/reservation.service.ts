@@ -32,8 +32,8 @@ export class ReservationService {
 
   async insertReservation(r: Reservation) {
     if (!this.userID) { alert('User is not logged in!'); return;  }
-    this.reservations = this.db.list('users/'+this.userID+'/reservations');
-    var newRef = await this.reservations.push(r)
+    this.reservations = this.db.list('users/' + this.userID + ' /reservations');
+    const newRef = await this.reservations.push(r)
     .then((snap) => {
       this.reservation.$key = snap.key;
     });
@@ -49,10 +49,7 @@ export class ReservationService {
     return this.reservation.hotelID;
   }
 
-  /*
-      Date Difference function retrieved from:
-      https://www.htmlgoodies.com/html5/javascript/calculating-the-difference-between-two-dates-in-javascript.html
-    */
+
   calcNights() {
     if (this.reservation.checkInDt === null || this.reservation.checkOutDt === null) {
       this.reservation.nights = null;

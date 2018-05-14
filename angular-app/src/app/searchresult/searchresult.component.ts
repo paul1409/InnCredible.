@@ -177,7 +177,7 @@ export class SearchresultComponent implements OnInit, OnDestroy {
 
 
   checkFavorite(hotelID) {
-    for (var i = 0; i < this.faves.length; i++) {
+    for (let i = 0; i < this.faves.length; i++) {
       if (this.faves[i] === hotelID) {
         return true;
       }

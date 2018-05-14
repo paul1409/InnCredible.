@@ -19,8 +19,7 @@ export class AppComponent {
         // this.name = auth;
         userProfileService.getUserInfo();
         this.authenticated = true;
-      }
-      else {
+      } else {
         this.authenticated = false;
       }
     });

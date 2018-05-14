@@ -1,6 +1,6 @@
 import {CanActivate, Router} from '@angular/router';
 import {AngularFireAuth} from 'angularfire2/auth';
-import {Injectable} from "@angular/core";
+import {Injectable} from '@angular/core';
 import * as firebase from 'firebase/app';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(): Observable<boolean> {
         return this.afAuth.authState.map(auth => {
-            if(!auth){
+            if (!auth) {
                 this.router.navigate(['/login']);
                 return false;
             }

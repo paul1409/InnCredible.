@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
   dtToday = (new Date).toISOString().split('T')[0];
 
-  done: boolean = false;
+  done: false;
 
   options = {
     types: ['(cities)'],
@@ -39,11 +39,11 @@ export class HomeComponent implements OnInit {
   onSubmit(searchformdata) {
 
     if (searchformdata.valid) {
-      if(this.citynameAuto != null) {
+      if (this.citynameAuto != null) {
         this.router.navigate(['/searchresults', this.citynameAuto, searchformdata.value.checkindate, searchformdata.value.checkoutdate]);
-      }
-      else {
-        this.router.navigate(['/searchresults', searchformdata.value.cityname, searchformdata.value.checkindate, searchformdata.value.checkoutdate]);
+      } else {
+        this.router.navigate(['/searchresults', searchformdata.value.cityname, searchformdata.value.checkindate,
+        searchformdata.value.checkoutdate]);
       }
     }
   }
@@ -51,16 +51,16 @@ export class HomeComponent implements OnInit {
   ngOnInit() {}
 
   handleAddressChange(event) {
-    var location = event.formatted_address;
-    var segments = location.split(',');
+    const location = event.formatted_address;
+    const segments = location.split(',');
     this.citynameAuto = segments[0];
   }
 
   updateDate() {
-    var checkIn = (<HTMLInputElement>document.getElementById('checkindate'));
-    var checkOut = (<HTMLInputElement>document.getElementById('checkoutdate'));
+    const checkIn = (<HTMLInputElement>document.getElementById('checkindate'));
+    const checkOut = (<HTMLInputElement>document.getElementById('checkoutdate'));
 
-    checkOut.setAttribute("min", checkIn.value);
+    checkOut.setAttribute('min', checkIn.value);
   }
 
 

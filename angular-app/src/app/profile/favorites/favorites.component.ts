@@ -13,6 +13,4 @@ export class FavoritesComponent implements OnInit {
   ngOnInit() {
   }
 
-  
-
 }

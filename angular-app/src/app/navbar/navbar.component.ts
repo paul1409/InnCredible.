@@ -10,20 +10,19 @@ import { UserProfileService } from '../services/profile.service';
 })
 export class NavbarComponent implements OnInit {
 
-  //name: any;
+  // name: any;
   authenticated: boolean;
 
   constructor(public afa: AngularFireAuth, private router: Router, public userProfileService: UserProfileService) {
-    this.afa.authState.subscribe(auth => {  
-      if(auth) {
+    this.afa.authState.subscribe(auth => {
+      if (auth) {
         this.authenticated = true;
-      }
-      else {
+      } else {
         this.authenticated = false;
       }
     });
   }
-  
+
   ngOnInit() {
   }
 

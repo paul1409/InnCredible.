@@ -24,5 +24,5 @@ export class MybookingsComponent implements OnInit {
 
   setText() {
     this.txt_comment = (<HTMLTextAreaElement>document.getElementById('textarea')).value;
-  } 
+  }
 }

@@ -41,7 +41,7 @@ export class ReviewComponent implements OnInit {
   }
 
   roomCharge(): number {
-    if(this.reservation === null || this.reservation.nights === null || this.hotelData === null || this.hotelData.price === null) {
+    if (this.reservation === null || this.reservation.nights === null || this.hotelData === null || this.hotelData.price === null) {
       return -1;
     }
     return (parseFloat(this.hotelData.price) * this.reservation.nights * this.reservation.rooms);
@@ -57,7 +57,7 @@ export class ReviewComponent implements OnInit {
 
   onClick() {
     const updateRes = this.reservation;
-    updateRes.totalCost = this.orderTotal()
+    updateRes.totalCost = this.orderTotal();
 
     this.reservationService.changeReservation(updateRes);
     if (this.userProfileService.isRedeem) {
@@ -73,7 +73,8 @@ export class ReviewComponent implements OnInit {
   // getCheckIn() {
   //   if(this.reservation == null) {
   //     return null;
-  //   } else if(this.reservation.checkInDt == null || this.reservation.checkInDt == undefined || !(this.reservation.checkInDt instanceof Date)) {
+  //   } else if(this.reservation.checkInDt == null || this.reservation.checkInDt == undefined ||
+  //     !(this.reservation.checkInDt instanceof Date)) {
   //     //console.log('Instance 2 '+ (this.reservation.checkInDt instanceof Date));
   //     return null;
   //   }

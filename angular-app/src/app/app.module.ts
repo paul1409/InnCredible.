@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CalendarModule } from 'angular-calendar';
-import { GooglePlaceModule } from "ngx-google-places-autocomplete";
+import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
 import {
   startOfDay,
   endOfDay,
@@ -17,7 +17,7 @@ import {
   isSameDay,
   isSameMonth,
   addHours
-} from 'date-fns'
+} from 'date-fns';
 import { RecaptchaModule } from 'angular-google-recaptcha';
 import { OrderModule } from 'ngx-order-pipe';
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -64,10 +64,10 @@ import { ReservationService } from './booking/shared/reservation.service';
 import { SearchresultComponent } from './searchresult/searchresult.component';
 import { SearchService } from './services/search.service';
 import { FilterService } from './services/filter.service';
-import { SenditineraryinformationService } from "./services/senditineraryinformation.service";
+import { SenditineraryinformationService } from './services/senditineraryinformation.service';
 
-//Models
-import { Booking } from './models/booking'
+// Models
+import { Booking } from './models/booking';
 import { Hotel } from './models/hotel';
 
 

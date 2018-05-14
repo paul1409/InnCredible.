@@ -5,7 +5,7 @@ import {Itineraryinformation} from '../itineraryinformation';
 export class SenditineraryinformationService {
 
   model = new Itineraryinformation();
-  saveInformation(name, address, guests, rooms, checkindate: Date, checkoutdate: Date, tbt, rewards, tax, total, Email){
+  saveInformation(name, address, guests, rooms, checkindate: Date, checkoutdate: Date, tbt, rewards, tax, total, Email) {
     this.model.hotelname = name;
     this.model.address = address;
     this.model.numberofguests = guests;
